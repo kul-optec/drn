@@ -1,0 +1,3 @@
+classdef Proximable < handle
+    
+end
