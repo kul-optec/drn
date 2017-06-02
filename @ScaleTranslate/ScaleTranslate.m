@@ -1,15 +1,15 @@
-% PRESCALE Scales and translates a function input
+% SCALETRANSLATE Scales and translates a function input
 %
-%   PRESCALE(f, a, b) returns the function f(a.*x - b).
-% 
+%   SCALETRANSLATE(f, a, b) returns the function f(a.*x - b).
+%
 %   Only scalar a (i.e., uniform scaling) is currently available.
 
-classdef Prescale < Proximable
+classdef ScaleTranslate < Proximable
     properties
         f, a, b
     end
     methods
-        function obj = Prescale(f, a, b)
+        function obj = ScaleTranslate(f, a, b)
             if nargin < 1, a = 1.0; end
             if nargin < 2, b = 0.0; end
             if ~isscalar(a)

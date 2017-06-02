@@ -12,5 +12,8 @@ classdef Quadratic < Proximable
             obj.q = q;
             obj.gam_prox = 0;
         end
+        function p = is_quadratic(obj)
+            p = true;
+        end
     end
 end
