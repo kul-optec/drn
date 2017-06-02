@@ -55,6 +55,7 @@ function [x, out] = drn(f, g, s0, gam, opt)
     cnt_proxg = cnt_proxg + 1;
     res = z-x;
     DRE_s = DRE(s, x, z, fx, gz, gam);
+
     for it = 1:opt.maxit
 
         normfpr(it,1) = vecnorm(x-z);
@@ -73,7 +74,18 @@ function [x, out] = drn(f, g, s0, gam, opt)
         end
 
         % choose direction
+        if isequal(opt.method,'adrs')
+            cache.beta = (it-1)/(it+2);
+            if it>1                
+                cache.sbarp = cache.sbar;
+                cache.sbar = s + cache.lambda*res;
+            else
+                cache.sbar = s + cache.lambda*res;
+                cache.sbarp = cache.sbar;
+            end
+        end
 
+            
         [dir, cache] = opt.methodfun(cache, res, p, q, it == 1);
 
         % perform line-search over the DRE
@@ -117,6 +129,7 @@ function [x, out] = drn(f, g, s0, gam, opt)
         fx = fx1; gz = gz1; % not really needed, but just in case
         res = res1;
         DRE_s = DRE_s1;
+
     end
 
     out.x = x;
