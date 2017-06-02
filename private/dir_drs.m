@@ -2,6 +2,6 @@
 
 function [dir, cache] = dir_drs(cache, v, varargin)
 
-dir = v;
+dir = cache.lambda*v;
 
 end
