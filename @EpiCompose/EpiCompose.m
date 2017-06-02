@@ -6,8 +6,8 @@ classdef EpiCompose < Proximable
     properties
         f, A
         mu
-        flag
-        Q, q, C, d
+        flag % f is 1: Quadratic, 2: QuadraticOverAffine, 3: Anything else
+        Q, q, C, d % to store data of (generalized) quadratic functions
         gam_prox, L_prox % to store Cholesky factor
     end
     methods
@@ -17,7 +17,11 @@ classdef EpiCompose < Proximable
                 obj.Q = f.Q;
                 obj.q = f.q;
             else
-                error('only f of type Quadratic is supported');
+                obj.flag = 3;
+                obj.mu = Proximable.get_gram_diagonal(A');
+                if obj.mu == 0
+                    error('A must be s.t. A''*A = mu*Id');
+                end
             end
             obj.f = f;
             obj.A = A;

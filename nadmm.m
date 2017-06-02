@@ -4,7 +4,7 @@
 %       subject to Ax + Bz = b
 %
 
-function [x, z, out] = nadmm(f, g, A, B, b, s0, gam, opt)
+function [s, out] = nadmm(f, g, A, B, b, s0, gam, opt)
 
     muA = get_gram_diagonal(A');
     if muA == 0
@@ -19,7 +19,7 @@ function [x, z, out] = nadmm(f, g, A, B, b, s0, gam, opt)
     phi1 = EpiCompose(f, A);
     phi2 = ScaleTranslate(EpiCompose(g, B), -1, b);
 
-    [s, out_dual] = drn(phi1, phi2, s0, gam, opt);
+    [s, out] = drn(phi1, phi2, s0, gam, opt);
 
     % TODO: get primal solution
 end

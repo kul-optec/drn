@@ -1,4 +1,4 @@
-function [p, v] = prox(obj, x, gam)
+function [p, v] = prox(obj, s, gam)
     switch obj.flag
         case 1 % f = Quadratic
             if gam ~= obj.gam_prox % more robust test?
@@ -6,13 +6,14 @@ function [p, v] = prox(obj, x, gam)
                 obj.gam_prox = gam;
                 obj.L_prox = chol(obj.Q + (1/gam)*obj.A'*obj.A); % do differently for sparse?
             end
-            p = obj.L_prox\(obj.L_prox'\((obj.A'*x)/gam - obj.q));
-            v = 0.5*(p'*(obj.Q*p)) + obj.q'*p; % can we save something here?
+            x = obj.L_prox\(obj.L_prox'\((obj.A'*s)/gam - obj.q));
+            v = 0.5*(x'*(obj.Q*x)) + obj.q'*x; % can we save something here?
         case 2 % f = QuadraticOverAffine
             error('not implemented');
-        case 3 % f = Any proximable function and A is special
-            error('not implemented');
+        case 3 % f = Any proximable function and A'*A = mu*Id, mu > 0
+            [x, v] = obj.f.prox(obj.A'*s/obj.mu, obj.mu/gam);
         otherwise
             error('not implemented');
     end
+    p = obj.A*x;
 end
