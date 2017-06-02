@@ -2,14 +2,14 @@
 
 classdef SeparableSum < Proximable
     properties
-        objs
+        fs
         dims
         idx
         dimsum
     end
     methods
-        function obj = SeparableSum(objs, dims, idx)
-            l = length(objs);
+        function obj = SeparableSum(fs, dims, idx)
+            l = length(fs);
             if nargin < 3
                 idx = 1:l;
             end
@@ -18,7 +18,7 @@ classdef SeparableSum < Proximable
             for i = 2:length(idx)
                 dimsum(i) = dimsum(i-1) + dims{i};
             end
-            obj.objs = objs;
+            obj.fs = fs;
             obj.dims = dims;
             obj.idx = idx;
             obj.dimsum = dimsum;

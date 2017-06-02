@@ -6,7 +6,7 @@ function test(obj)
     for i = 1:length(obj.idx)
         x1 = randn(obj.dims{i}, 1);
         x = [x; x1];
-        [y1, v1] = obj.objs{obj.idx(i)}.prox(x1, gam);
+        [y1, v1] = obj.fs{obj.idx(i)}.prox(x1, gam);
         y = [y; y1];
         v = v + v1;
     end
