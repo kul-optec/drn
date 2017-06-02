@@ -6,6 +6,8 @@
 
 function [s, out] = nadmm(f, g, A, B, b, s0, gam, opt)
 
+    if nargin < 8, opt = struct(); end
+
     phi1 = EpiCompose(f, A);
     phi2 = ScaleTranslate(EpiCompose(g, B), -1, b);
 
