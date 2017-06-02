@@ -1,6 +1,6 @@
 % CONJUGATE Fenchel conjugate function (of some other given function)
 
-classdef Conjugate
+classdef Conjugate < Proximable
     properties
         f
     end
