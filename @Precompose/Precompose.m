@@ -1,4 +1,7 @@
 % PRECOMPOSE Precomposition with a linear operator
+%
+%   PRECOMPOSE(f, L, mu) returns the function f(L*x), where L is a linear
+%   operator such that L*L' = mu*I, for mu > 0.
 
 classdef Precompose < Proximable
     properties
