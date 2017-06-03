@@ -17,6 +17,7 @@ classdef EpiCompose < Proximable
                 obj.Q = f.Q;
                 obj.q = f.q;
                 obj.gam_prox = 0;
+                if isscalar(A), A = A*speye(size(f.Q, 2)); end
             else
                 obj.flag = 3;
                 obj.mu = Proximable.get_gram_diagonal(A');
