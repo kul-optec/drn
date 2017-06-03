@@ -43,6 +43,7 @@ function [z, out] = drn(f, g, s0, gam, opt)
     q = [];
     normfpr = zeros(opt.maxit,1);
     dreval = zeros(opt.maxit,1);
+
     % initialize cache for QN methods
 
     cache.memory = opt.memory;
@@ -74,6 +75,7 @@ function [z, out] = drn(f, g, s0, gam, opt)
         end
 
         % choose direction
+
         if isequal(opt.method,'adrs')
             cache.beta = (it-1)/(it+2);
             if it>1                
@@ -85,7 +87,6 @@ function [z, out] = drn(f, g, s0, gam, opt)
             end
         end
 
-            
         [dir, cache] = opt.methodfun(cache, res, p, q, it == 1);
 
         % perform line-search over the DRE
@@ -139,6 +140,7 @@ function [z, out] = drn(f, g, s0, gam, opt)
     out.dreval = dreval(1:it,1);
     out.cnt_proxf = cnt_proxf;
     out.cnt_proxg = cnt_proxg;
+    out.opt = opt;
 
 end
 
