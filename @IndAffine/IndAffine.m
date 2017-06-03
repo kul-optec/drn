@@ -1,4 +1,4 @@
-% INDAFFINE indicator function of an affine subspace
+% INDAFFINE Indicator function of an affine subspace
 
 classdef IndAffine < Proximable
     properties
