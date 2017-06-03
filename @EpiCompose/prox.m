@@ -11,7 +11,7 @@ function [p, v] = prox(obj, s, gam)
         case 2 % f = QuadraticOverAffine
             error('not implemented');
         case 3 % f = Any proximable function and A'*A = mu*Id, mu > 0
-            [x, v] = obj.f.prox(obj.A'*s/obj.mu, obj.mu/gam);
+            [x, v] = obj.f.prox(obj.A'*s/obj.mu, gam/obj.mu);
         otherwise
             error('not implemented');
     end
