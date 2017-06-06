@@ -173,11 +173,11 @@ function opt = default_opt(opt)
     % verbosity
     if ~isfield(opt, 'display'), opt.display = 1; end
     % direction
+    if ~isfield(opt, 'method'), opt.method = 'lbfgs'; end
     if strcmp(opt.method, 'prs')
         opt.method = 'drs';
         opt.lambda = 2.0;
     end
-    if ~isfield(opt, 'method'), opt.method = 'lbfgs'; end
     opt.methodfun = str2func(strcat('dir_', lower(opt.method)));
     % memory
     if ~isfield(opt, 'memory'), opt.memory = 10; end
