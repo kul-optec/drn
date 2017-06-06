@@ -16,7 +16,7 @@
 %   then p is the proximal point of x wrt f and stepsize gam > 0, while
 %   fp = f(p) is the value of f at p.
 
-function [z, out] = drn(f, g, s0, gam, opt)
+function out = drn(f, g, s0, gam, opt)
 
     % TODO: make gam optional (put it in opt)
 
