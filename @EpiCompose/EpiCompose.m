@@ -9,6 +9,7 @@ classdef EpiCompose < Proximable
         flag % f is 1: Quadratic, 2: QuadraticOverAffine, 3: Anything else
         Q, q, C, d % to store data of (generalized) quadratic functions
         gam_prox, L_prox % to store Cholesky factor
+        x
     end
     methods
         function obj = EpiCompose(f, A)

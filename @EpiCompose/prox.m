@@ -6,14 +6,14 @@ function [p, v] = prox(obj, s, gam)
                 obj.gam_prox = gam;
                 obj.L_prox = chol(obj.Q + (1/gam)*obj.A'*obj.A); % do differently for sparse?
             end
-            x = obj.L_prox\(obj.L_prox'\((obj.A'*s)/gam - obj.q));
+            obj.x = obj.L_prox\(obj.L_prox'\((obj.A'*s)/gam - obj.q));
             v = 0.5*(x'*(obj.Q*x)) + obj.q'*x; % can we save something here?
         case 2 % f = QuadraticOverAffine
             error('not implemented');
         case 3 % f = Any proximable function and A'*A = mu*Id, mu > 0
-            [x, v] = obj.f.prox(obj.A'*s/obj.mu, gam/obj.mu);
+            [obj.x, v] = obj.f.prox(obj.A'*s/obj.mu, gam/obj.mu);
         otherwise
             error('not implemented');
     end
-    p = obj.A*x;
+    p = obj.A*obj.x;
 end
