@@ -28,6 +28,6 @@ assert(norm(x_drn - x_star)/(1+norm(x_star)) <= 1e-8);
 
 rho = 1/gam;
 out_nadmm = nadmm(f, g, 1, -1, 0, zeros(n, 1), rho, opt);
-x_nadmm = out_nadmm.drn.z;
+x_nadmm = out_nadmm.z;
 
 assert(norm(x_nadmm - x_star)/(1+norm(x_star)) <= 1e-8);

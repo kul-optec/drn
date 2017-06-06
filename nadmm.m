@@ -15,7 +15,7 @@ function out = nadmm(f, g, A, B, b, s0, rho, opt)
     
     % Solve problem using DRN
 
-    out.drn = drn(phi1, phi2, s0, 1/rho, opt);
+    out = drn(phi1, phi2, s0, 1/rho, opt);
     
     % Report solution to original problem
     

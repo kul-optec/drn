@@ -31,6 +31,7 @@ function out = drn(f, g, s0, gam, opt)
 
     cnt_proxf = 0;
     cnt_proxg = 0;
+    cnt_lsfails = 0;
     normfpr = zeros(opt.maxit, 1);
     dreval = zeros(opt.maxit, 1);
 
@@ -76,7 +77,7 @@ function out = drn(f, g, s0, gam, opt)
 
         % choose direction
 
-        if isequal(opt.method,'adrs')
+        if isequal(opt.method, 'adrs')
             cache.beta = (it-1)/(it+2);
             if it>1                
                 cache.sbarp = cache.sbar;
@@ -110,6 +111,7 @@ function out = drn(f, g, s0, gam, opt)
         end
         
         if lsfail
+            cnt_lsfails = cnt_lsfails + 1;
             s1 = s + opt.lambda*res;
             [x1, fx1] = f.prox(s1, gam);
             cnt_proxf = cnt_proxf + 1;
@@ -137,9 +139,10 @@ function out = drn(f, g, s0, gam, opt)
     out.z = z;
     out.iterations = it;
     out.fpr = normfpr(1:it, 1);
-    out.dreval = dreval(1:it, 1);
+    out.dre = dreval(1:it, 1);
     out.cnt_proxf = cnt_proxf;
     out.cnt_proxg = cnt_proxg;
+    out.cnt_lsfails = cnt_lsfails;
     out.opt = opt;
 
 end
@@ -170,6 +173,10 @@ function opt = default_opt(opt)
     % verbosity
     if ~isfield(opt, 'display'), opt.display = 1; end
     % direction
+    if strcmp(opt.method, 'prs')
+        opt.method = 'drs';
+        opt.lambda = 2.0;
+    end
     if ~isfield(opt, 'method'), opt.method = 'lbfgs'; end
     opt.methodfun = str2func(strcat('dir_', lower(opt.method)));
     % memory
