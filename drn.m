@@ -31,6 +31,8 @@ function out = drn(f, g, s0, gam, opt)
 
     cnt_proxf = 0;
     cnt_proxg = 0;
+    normfpr = zeros(opt.maxit, 1);
+    dreval = zeros(opt.maxit, 1);
 
     if opt.display
         fprintf('%8s%14s%14s%14s\n', 'iter', 'FPR', 'DRE', 'tau');
@@ -41,8 +43,6 @@ function out = drn(f, g, s0, gam, opt)
 
     p = [];
     q = [];
-    normfpr = zeros(opt.maxit,1);
-    dreval = zeros(opt.maxit,1);
 
     % initialize cache for QN methods
 
@@ -136,8 +136,8 @@ function out = drn(f, g, s0, gam, opt)
     out.x = x;
     out.z = z;
     out.iterations = it;
-    out.fpr = normfpr(1:it,1);
-    out.dreval = dreval(1:it,1);
+    out.fpr = normfpr(1:it, 1);
+    out.dreval = dreval(1:it, 1);
     out.cnt_proxf = cnt_proxf;
     out.cnt_proxg = cnt_proxg;
     out.opt = opt;
