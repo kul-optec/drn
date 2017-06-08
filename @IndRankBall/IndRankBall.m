@@ -2,12 +2,13 @@
 
 classdef IndRankBall < Proximable
     properties
+        m, n % matrix size
         r % ball radius
         method % indicates which svd to use
     end
     methods
-        function obj = IndBallRank(r, method)
-            if nargin < 2
+        function obj = IndRankBall(m, n, r, method)
+            if nargin < 4
                 method = 'svds';
             end
             switch method
@@ -18,6 +19,8 @@ classdef IndRankBall < Proximable
                 otherwise
                     error('unknown method');
             end
+            obj.m = m;
+            obj.n = n;
             obj.r = r;
         end
     end
