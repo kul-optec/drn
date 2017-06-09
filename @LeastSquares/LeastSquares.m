@@ -7,6 +7,8 @@ classdef LeastSquares < Proximable
         S % to store square matrix, i.e., A'A or AA' depending on size
         L_prox % to store Cholesky factor for prox computation
         gam_prox
+        flag_sparse
+        time_fact
     end
     methods
         function obj = LeastSquares(A, b, lam)
@@ -16,12 +18,18 @@ classdef LeastSquares < Proximable
             obj.b = b;
             obj.lam = lam;
             obj.Atb = A'*b;
-            if size(A, 1) <= size(A, 2)
-                obj.S = A*A'; % do differently for sparse?
+            if issparse(A)
+                obj.flag_sparse = true;
             else
-                obj.S = A'*A; % do differently for sparse?
+                obj.flag_sparse = false;
+                if size(A, 1) <= size(A, 2)
+                    obj.S = A*A';
+                else
+                    obj.S = A'*A;
+                end
             end
             obj.gam_prox = 0;
+            obj.time_fact = 0;
         end
     end
 end

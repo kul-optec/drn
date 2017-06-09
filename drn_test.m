@@ -2,5 +2,6 @@
 
 test_boxqp
 test_lasso
+test_lasso_sparse
 
 fprintf('All tests passed!\n');
