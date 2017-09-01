@@ -2,7 +2,7 @@
 
 This repository contains the MATLAB implementation of Douglas-Rachford Newton-type methods (DRN) and Newton-type ADMM (NADMM).
 
-## Installation
+### Installation
 
 To install the package, run the following from the MATLAB console:
 ```
@@ -20,7 +20,7 @@ The commands
 ```
 print out the docstrings for the DRN and NADMM respectively.
 
-**Example: the lasso.**
+### Example: the lasso
 
 ```
 % Set up problem and options
