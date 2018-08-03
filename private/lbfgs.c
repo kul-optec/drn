@@ -76,7 +76,7 @@ void LBFGS_MATVEC_TWOLOOP(int n, int mem, double * dir_n, double * s_n_m, double
 
 void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 {
-    int n, mem, curridx, currmem, dir_dims[2];
+    size_t n, mem, curridx, currmem, dir_dims[2];
     double * dir, * s, * y, * ys, H, * g, * alpha;
 
     if (nrhs != 7) {
