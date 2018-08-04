@@ -9,7 +9,7 @@ error_msg = 'Some dependency could not be compiled: ';
 success_msg = 'Succesfully compiled: ';
 
 for k = 1:length(to_compile)
-  if mex('-outdir', private_path, to_compile{k})
+  if mex('-lmwblas','-outdir', private_path, to_compile{k})
     error([error_msg, to_compile{k}]);
   else
     disp([success_msg, to_compile{k}]);
